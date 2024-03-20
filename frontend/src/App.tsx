@@ -1,24 +1,15 @@
-import './App.css'
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./routes/AppRoutes";
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import LoginPage from './pages/LoginPage'
-import ResgisterPage from './pages/RegisterPage'
-
-
-function App() {
-
-
+const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <section className='app' style={{height: '100vh'}}>
-        <Routes>
-          <Route path='/register' element={<ResgisterPage />} />
-          <Route path='/login' element={<LoginPage />} />
-        </Routes>
+      <section className="app" style={{ height: "100vh" }}>
+        <AppRoutes />
       </section>
     </BrowserRouter>
-    
-  )
-}
+  );
+};
 
-export default App
+export default App;
