@@ -4,11 +4,11 @@ import AppRoutes from "./routes/AppRoutes";
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <section className="app" style={{ height: "100vh" }}>
+    <section className="app" style={{ height: "100vh" }}>
+      <BrowserRouter>
         <AppRoutes />
-      </section>
-    </BrowserRouter>
+      </BrowserRouter>
+    </section>
   );
 };
 
