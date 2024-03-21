@@ -1,0 +1,30 @@
+@import 'variables.scss';
+
+.container-notification {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    top: 20px;
+    left: 20px;
+    height: 80px;
+    width: 350px;
+    border-radius: .5vw;
+    background-color: $color-secondary;
+    border-left: 4px solid;
+    font-size: 35px;
+
+    .container-msg {
+        line-height: 25px;
+
+        h2 {
+            font-size: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            opacity: 60%;
+        }
+    }
+}

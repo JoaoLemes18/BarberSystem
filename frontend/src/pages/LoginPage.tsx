@@ -15,21 +15,25 @@ interface FormState {
 
 const LoginPage = () => {
 
-  const [ form, setForm ] = useState<FormState>({})
+  const [ form, setForm ] = useState<FormState>({
+    email: '',
+    password: ''
+  })
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setForm({...form, [name]: value})
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+      e.preventDefault()
       await axios.post('http://localhost:3000/auth/login', form)
   }
 
 
   return (
     <section className='body'>
-        <form onSubmit={handleSubmit}>
+        <form method='post' onSubmit={handleSubmit}>
             <h2>Bem-Vindo ao ShearSmart, <br /> Faça Login.</h2>
             <p>Não possui uma conta? {''}
                <a href="/register">Cadastrar</a>
