@@ -1,14 +1,17 @@
-import '../styles/Button.scss'
+import "../styles/Button.scss";
 
 interface ButtonProps {
-  content: string
-  props?: any
+  content: string;
+  props?: any;
 }
 
-const Button = ({content, ...props}: ButtonProps) => {
+const Button = ({ content, ...props }: ButtonProps) => {
   return (
-    <button {...props}> <p>{content}</p> </button>
-  )
-}
+    <button {...props}>
+      {" "}
+      <p>{content}</p>{" "}
+    </button>
+  );
+};
 
-export default Button
+export default Button;

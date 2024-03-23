@@ -1,41 +1,41 @@
-@import './variables.scss';
+@import "./variables.scss";
 
 button {
-    cursor: pointer;
-    position: relative;
-    padding: 15px;
-    background: $color-black;
-    color: $color-secondary;
-    font-size: 16px;
-    border-radius: .5vw;
-    outline: none;
-    border: none;
-    overflow: hidden; 
+  cursor: pointer;
+  position: relative;
+  padding: 15px;
+  background: $color-black;
+  color: $color-secondary;
+  font-size: 16px;
+  border-radius: 0.5vw;
+  outline: none;
+  border: none;
+  overflow: hidden;
 
-    p {
-        position: relative;
-        z-index: 1;
-    }
+  p {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 button::after {
-    content: '';
-    top: -10px;
-    left: -10px;
-    width: 10px;
-    height: 10px;
-    position: absolute;
-    border-radius: 100%;
-    background-color: rgb(20, 20, 20);
-    z-index: 0;
+  content: "";
+  top: -10px;
+  left: -10px;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  border-radius: 100%;
+  background-color: rgb(20, 20, 20);
+  z-index: 0;
 }
 
 button:hover::after {
-    animation: animAfter .5s forwards ease-in-out;
+  animation: animAfter 0.5s forwards ease-in-out;
 }
 
 @keyframes animAfter {
-    100% {
-        scale: 100;
-    }
+  100% {
+    scale: 100;
+  }
 }
