@@ -17,6 +17,7 @@ function App() {
         <Routes>
           <Route path='/register' element={<ResgisterPage />} />
           <Route path='/login' element={<LoginPage />} />
+      
         </Routes>
       </section>
     </ModalProvider>
