@@ -1,16 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/Modal.scss";
 
 interface ModalProps {
   show: boolean;
   onClose: () => void;
+  onSave: (formData: { name: string; time: string }) => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ show, onClose }) => {
+const Modal: React.FC<ModalProps> = ({ show, onClose, onSave }) => {
   const [formData, setFormData] = useState({
     name: "",
     time: "",
   });
+
+  useEffect(() => {
+    if (show) {
+      setFormData({
+        name: "",
+        time: "",
+      });
+    }
+  }, [show]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -22,7 +32,7 @@ const Modal: React.FC<ModalProps> = ({ show, onClose }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Formulário enviado:", formData);
+    onSave(formData);
     onClose();
   };
 

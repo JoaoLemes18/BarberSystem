@@ -14,7 +14,7 @@ interface Customer {
 interface ListClientsProps {
   customers: Customer[];
   onDelete: (id: number) => void;
-  onEdit: (id: number) => void;
+  onEdit: (id: number, name: string, time: string) => void; // Alterada a assinatura da função onEdit
 }
 
 const ListClients: React.FC<ListClientsProps> = ({
@@ -49,7 +49,11 @@ const ListClients: React.FC<ListClientsProps> = ({
                 </button>
               </td>
               <td>
-                <button onClick={() => onEdit(customer.id)}>
+                <button
+                  onClick={() =>
+                    onEdit(customer.id, customer.name, customer.time)
+                  }
+                >
                   <IoPencilOutline />
                 </button>
               </td>
