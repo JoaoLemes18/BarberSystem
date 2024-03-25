@@ -1,6 +1,7 @@
-@import './variables.scss';
+@import "./variables.scss";
 
 button {
+<<<<<<< HEAD
     cursor: pointer;
     position: relative;
     padding: 15px;
@@ -13,14 +14,27 @@ button {
     overflow: hidden; 
     white-space: nowrap;
     font-weight: 600;
+=======
+  cursor: pointer;
+  position: relative;
+  padding: 15px;
+  background: $color-black;
+  color: $color-secondary;
+  font-size: 16px;
+  border-radius: 0.5vw;
+  outline: none;
+  border: none;
+  overflow: hidden;
+>>>>>>> 52776888b04831b8244df005dfa83cbbc8e76efc
 
-    p {
-        position: relative;
-        z-index: 1;
-    }
+  p {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 button::after {
+<<<<<<< HEAD
     content: '';
     top: -10px;
     left: -10px;
@@ -34,10 +48,25 @@ button::after {
 
 button:hover::after {
     animation: animAfter .2s forwards ease-in-out;
+=======
+  content: "";
+  top: -10px;
+  left: -10px;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  border-radius: 100%;
+  background-color: rgb(20, 20, 20);
+  z-index: 0;
+}
+
+button:hover::after {
+  animation: animAfter 0.5s forwards ease-in-out;
+>>>>>>> 52776888b04831b8244df005dfa83cbbc8e76efc
 }
 
 @keyframes animAfter {
-    100% {
-        scale: 100;
-    }
+  100% {
+    scale: 100;
+  }
 }
