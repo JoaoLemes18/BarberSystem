@@ -20,24 +20,3 @@ button {
   }
 }
 
-button::after {
-    content: '';
-    top: -10px;
-    left: -10px;
-    width: 10px;
-    height: 10px;
-    position: absolute;
-    border-radius: 100%;
-    background-color: $color-light-gray;
-    z-index: 0;
-}
-
-button:hover::after {
-    animation: animAfter .2s forwards ease-in-out;
-}
-
-@keyframes animAfter {
-  100% {
-    scale: 100;
-  }
-}

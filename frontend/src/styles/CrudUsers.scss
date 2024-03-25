@@ -1,0 +1,43 @@
+@import 'variables.scss';
+
+.container-cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    max-width: 1024px;
+    gap: 20px;
+    flex-wrap: wrap;
+
+    .card-customer {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid $border-color-gray;
+        background-color: $color-black-secondary;
+        
+        td {
+            color: $color-medium-gray;
+            overflow: hidden;
+            flex: 1 1;
+        }
+
+        .div-buttons {
+            display: flex;
+            gap: 15px;
+            
+            button {
+                height: 50px;
+                width: 50px;
+                padding: 0;
+                border-radius: 5px;
+                background: transparent;
+                color: $color-medium-gray;
+                border: 1px solid $border-color-gray;
+            }
+        }
+    }
+}

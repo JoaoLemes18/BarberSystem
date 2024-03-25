@@ -1,44 +1,50 @@
-import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import { TiDeleteOutline } from "react-icons/ti";
+// STYLES
 import "react-toastify/dist/ReactToastify.css";
-import "../styles/CrudUsers.scss";
-import Button from "../components/Button";
-import ListClients from "../components/ListClients";
-import Modal from "../components/Modal";
+import '../styles/CrudUsers.scss'
 
-import { useEffect } from 'react'
+// OTHERS
+import { useEffect, useState } from 'react'
 import axios from 'axios'
+
+// COMPOTENTS
+import ListClients from "../components/ListClients";
 
 
 const CrudUsers = () => {
 
+  const [customers, setCustomer] = useState()
+
   useEffect(() => {
     const fetchCookies = async () => {
-      const token = document.cookie.split('=')[1]
-   
-      try {
-        const response = await axios.get('http://localhost:3000/users/listUsers', {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        })
-
-        console.log(response)
-      } catch (err) {
-        console.log(err)
+      const cookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('userToken='));
+    
+      if (cookie) {
+        const token = cookie.split('=')[1];
+        
+        try {
+          const response = await axios.get('http://localhost:3000/users/listUsers', {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+         
+          setCustomer(response.data)
+          return response
+        } catch (err) {
+          return err
+        }
+      } else {
+        console.log('User token cookie not found.')
       }
-    }
-
+    };
     fetchCookies()
-  }, [])
+  }, []);
 
   return (
-    <section className="container">
-   sdsadas
+    <section className="body">
+      <ListClients customers={customers || []}/>
     </section>
-  )
-}
-
+  );
+};
 
 export default CrudUsers;
