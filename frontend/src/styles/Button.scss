@@ -4,13 +4,15 @@ button {
     cursor: pointer;
     position: relative;
     padding: 15px;
-    background: $color-black;
-    color: $color-secondary;
+    background: $color-white-primary;
+    color: $color-black-primary;
     font-size: 16px;
-    border-radius: .5vw;
+    border-radius: 10px;
     outline: none;
     border: none;
     overflow: hidden; 
+    white-space: nowrap;
+    font-weight: 600;
 
     p {
         position: relative;
@@ -26,12 +28,12 @@ button::after {
     height: 10px;
     position: absolute;
     border-radius: 100%;
-    background-color: rgb(20, 20, 20);
+    background-color: $color-light-gray;
     z-index: 0;
 }
 
 button:hover::after {
-    animation: animAfter .5s forwards ease-in-out;
+    animation: animAfter .2s forwards ease-in-out;
 }
 
 @keyframes animAfter {

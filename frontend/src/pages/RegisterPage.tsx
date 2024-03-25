@@ -1,23 +1,24 @@
-import { ChangeEvent, useContext, useState } from 'react'
-import axios from 'axios';
-
+// COMPONENTS
 import MsgNotification from '../components/MsgNotification';
 import Button from '../components/Button'
 import Input from '../components/Input'
-import '../styles/LoginPage.scss'
 
-import { MdOutlineMailOutline } from "react-icons/md";
-import { MdOutlineSecurity } from "react-icons/md";
-import { GrSecure } from "react-icons/gr";
-import { FiUser } from "react-icons/fi";
+// STYLES
+import '../styles/Login&SignPage.scss'
 
-import { ModalMsgContext } from '../context/MsgContext';
+// OTHERS
+import { ModalMsgContext, ModalProvider } from '../context/MsgContext';
+import { ChangeEvent, useContext, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 interface FormState {
   [key: string]: string
 }
 
  const LoginPage = () => {
+
+  const navigate = useNavigate()
 
   const {msgModal, handleModal} = useContext(ModalMsgContext)
 
@@ -34,66 +35,47 @@ interface FormState {
   }
 
 
-  const [propMsg, setPropMsg ] = useState({
-    title: '',
-    subtitle: '',
-    color: '',
-    typeMsg: ''
-  })
-
-  const errorName = {title: 'Nome Requerido', subtitle: 'Por favor preencha o nome', color: 'red', typeMsg: 'error'}
-  const errorEmail = {title: 'Email Requerido', subtitle: 'Por favor preencha o email', color: 'red', typeMsg: 'error'}
-  const errorPassword = {title: 'Senha Requerida', subtitle: 'Por favor preencha a senha', color: 'red', typeMsg: 'error'}
-  const errorConfirmPassword = {title: 'Senhas Desiguais', subtitle: 'As senhas não se confirmam', color: 'red', typeMsg: 'error'}
-
   const handleSubmit = async (e) => {
       e.preventDefault()
 
-      if(form.name == '') {
-        setPropMsg(errorName)
-        handleModal()
-        return
-      } 
+      if(form.email == '' || form.name == '' ||
+         form.password == '' || form.confirmpassword == '') {
+          handleModal()
+          return
+      }
 
-      if(form.email == '') {
-        setPropMsg(errorEmail)
-        handleModal()
-        return
-      } 
-
-      if(form.password == '') {
-        setPropMsg(errorPassword)
-        handleModal()
-        return
-      } 
-
-      if(form.confirmpassword != form.password) {
-        setPropMsg(errorConfirmPassword)
-        handleModal()
-        return
-      } 
-
+    try {
       await axios.post('http://localhost:3000/auth/register', form)
-      window.location.reload()
+      navigate('/login')
+    } catch (err) {
+      console.log(err)
+    }
   }
 
 
   return (
-    <section className='body'>
-        <form onSubmit={handleSubmit} method='post'>
-            <h2>Bem-Vindo ao ShearSmart, <br /> Faça Seu Cadastro.</h2>
-            <p>Já possui uma conta? {''}
-               <a href="/login">Entrar na conta</a>
-            </p> <br /> 
-            <Input onChange={handleInput} value={form.email} name='email' icon={<MdOutlineMailOutline />} type='email' placeholder='Email'/>
-            <Input onChange={handleInput} value={form.name} name='name' icon={<FiUser />} type='name' placeholder='Nome'/>
-            <Input onChange={handleInput} value={form.password} name='password' icon={<GrSecure />} type='password' placeholder='Senha'/>
-            <Input onChange={handleInput} value={form.confirmpassword} name='confirmpassword' icon={<MdOutlineSecurity />} type='password' placeholder='Confirmar Senha'/>
-            <Button content='Cadastrar'/>
-        </form>
+    <ModalProvider>
+      <section className='body'>
 
-        {msgModal && <MsgNotification title={propMsg.title} subtitle={propMsg.subtitle}  color={propMsg.color} typeMsg={propMsg.typeMsg}/>}
-    </section>
+          <h1><span>Bem-Vindo </span> <br /> a ShearSmart.</h1>
+          <form onSubmit={handleSubmit} method='post'>
+              <div className='div-two-inputs'>
+                <Input onChange={handleInput} value={form.email} name='email' type='email' placeholder='Email'/>
+                <Input onChange={handleInput} value={form.name} name='name' type='name' placeholder='Nome'/>
+              </div>
+              <Input onChange={handleInput} value={form.password} name='password' type='password' placeholder='Senha'/>
+              <Input onChange={handleInput} value={form.confirmpassword} name='confirmpassword' type='password' placeholder='Confirmar Senha'/>
+              <p className='p-have-account'>Já possui uma conta? <Link to='/login'>Login</Link> </p>
+              <Button content='Cadastrar'/>
+          </form>
+
+          {msgModal && <MsgNotification title={'Preencha os Campos'} 
+          subtitle={'Algum dos campos estão vazio'}  
+          color={'#D9343A'} 
+          typeMsg={'error'}/>}
+
+      </section>
+    </ModalProvider>
   )
 }
 

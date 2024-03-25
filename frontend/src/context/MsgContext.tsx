@@ -7,11 +7,16 @@ export const ModalProvider = ({children}: any) => {
     const [msgModal, setMsgModal] = useState(false)
 
     const handleModal = () => {
-        setMsgModal(msgModal)
+        if(!msgModal) {
+            setMsgModal(true)
+            setTimeout(() => {
+                setMsgModal(false)
+            }, 3000)
+        }
     }
 
     return (
-        <ModalMsgContext.Provider value={{ msgModal, handleModal }}>
+        <ModalMsgContext.Provider value={{ msgModal, handleModal}}>
             {children}
         </ModalMsgContext.Provider>
     )

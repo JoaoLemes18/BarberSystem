@@ -1,12 +1,14 @@
-const express = require("express");
-const conn = require("./db/conn");
-const app = express();
-const userRouter = require("./routes/userRouter");
+const express = require("express")
+const conn = require("./db/conn")
+const app = express()
+const userRouter = require("./routes/userRouter")
+const cors = require('cors')
 
+app.use(cors())
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }))
 
-app.use(userRouter);
+app.use(userRouter)
 
 conn
   .sync()

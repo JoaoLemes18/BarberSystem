@@ -7,7 +7,7 @@ import CrudUsers from "../pages/CrudUsers"
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
-      <Route path="/crudUsers" element={<CrudUsers />}/>
+      <Route path="/listUsers" element={<CrudUsers />}/>
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/login" element={<LoginPage />} />
     </Routes>

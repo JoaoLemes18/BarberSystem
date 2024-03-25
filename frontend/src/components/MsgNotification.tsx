@@ -1,8 +1,9 @@
 import '../styles/MsgNotification.scss'
 
-import { FaCheckCircle } from 'react-icons/fa'
-import { FaExclamationCircle} from 'react-icons/fa'
+// import { FaCheckCircle } from 'react-icons/fa'
+// import { FaExclamationCircle} from 'react-icons/fa'
 
+import { motion } from 'framer-motion'
 
 interface MsgProp {
     color: string
@@ -12,14 +13,20 @@ interface MsgProp {
 }
 
 const MsgNotification = ({color, typeMsg, title, subtitle}: MsgProp) => {
+
+
   return (
-    <div className='container-notification' style={{borderColor: color}}>
-        {typeMsg !== 'error'? <FaCheckCircle color={color}/> : <FaExclamationCircle color={color}/>}
+    <motion.div 
+    initial = {{scale: 0}}
+    whileInView={{scale: 1}}
+
+    className='container-notification' style={{borderColor: color}}>
         <div className='container-msg'>
             <h2>{title}</h2>
             <p>{subtitle}</p>   
         </div>
-    </div>
+        <div style={{background: color}} className='time'></div>
+    </motion.div>
   )
 }
 

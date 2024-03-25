@@ -5,6 +5,7 @@ require('dotenv').config()
 
 const User  = require('../models/User')
 
+
 exports.getAllUsers = async (req, res) => {
         try {
             const users = await User.findAll()
@@ -33,9 +34,9 @@ exports.createUser = async (req, res) => {
             email: email, 
             password: passwordHash
     })
-
+        return res.status(201).json({msg: 'User Created'})
     } catch(err) {
-        res.status(500).json({msg: 'Internal Server Error'})
+        return res.status(500).json({msg: 'Internal Server Error', err})
     }
     
 }
@@ -47,19 +48,20 @@ exports.loginUser = async (req, res) => {
     if(!password) return res.status(422).json({ msg: 'Required password' })
 
     // Check User Exist
+    try {
     const user = await User.findOne({ where: {email}, raw: true})
     if(!user) return res.status(404).json({msg: 'User not found'})
 
     const checkPassword = await bcrypt.compareSync(password, user.password)
     if(!checkPassword) return res.status(422).json({msg: 'Invalid Password'})
-
-    try {
+   
         const secret = process.env.SECRET
         const token = jwt.sign({
             id: user.id
-        }, secret)
+        }, secret, { expiresIn: '1h' })
 
-        res.status(200).json({ msg: 'Authentication successful', token })
+        
+       res.status(200).json({token: token})
         
 
     } catch (err) {
@@ -69,6 +71,7 @@ exports.loginUser = async (req, res) => {
 
 exports.listUsers = async (req, res) => {
     try {
+
         const users = await User.findAll()
         if(users) res.json(users)
 

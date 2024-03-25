@@ -10,13 +10,10 @@ interface InputProps {
   type: string
 }
 
-const Input = ({icon, ...props}: InputProps) => {
+const Input = ({...props}: InputProps) => {
+
   return (
-    <div className='container-input'>
-      {icon}
       <input {...props} />
-    </div>
-    
   )
 }
 
