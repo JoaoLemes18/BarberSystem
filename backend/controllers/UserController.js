@@ -4,7 +4,16 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
 const User  = require('../models/User')
+const Appointment = require('../models/Appointment')
 
+
+// User.sync({ alter: true }) // Sicronizar as mudanças do User
+//   .then(() => {
+//     console.log('Modelo sincronizado com o banco de dados');
+//   })
+//   .catch((err) => {
+//     console.error('Erro ao sincronizar modelo:', err);
+//   });
 
 exports.getAllUsers = async (req, res) => {
         try {
@@ -29,11 +38,18 @@ exports.createUser = async (req, res) => {
     const passwordHash = await bcrypt.hash(password, salt)
 
     try {
-        await User.create({
+        const newUser = await User.create({
             name: name, 
             email: email, 
-            password: passwordHash
+            password: passwordHash,
+            user_token: ''
     })
+
+        await Appointment.create({
+            id_user: newUser.id
+        })
+
+
         return res.status(201).json({msg: 'User Created'})
     } catch(err) {
         return res.status(500).json({msg: 'Internal Server Error', err})
@@ -58,9 +74,16 @@ exports.loginUser = async (req, res) => {
         const secret = process.env.SECRET
         const token = jwt.sign({
             id: user.id
-        }, secret, { expiresIn: '1h' })
+        }, secret, { expiresIn: '10h' })
+
+        User.update({token_auth: token}, {
+            where: {
+                id: user.id
+            }
+        })
 
         
+    
        res.status(200).json({token: token})
         
 
@@ -71,7 +94,6 @@ exports.loginUser = async (req, res) => {
 
 exports.listUsers = async (req, res) => {
     try {
-
         const users = await User.findAll()
         if(users) res.json(users)
 

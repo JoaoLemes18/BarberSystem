@@ -8,6 +8,7 @@ import axios from 'axios'
 
 // COMPOTENTS
 import ListClients from "../components/ListClients";
+import CardClients from "../components/CardClients"
 
 
 const CrudUsers = () => {
@@ -40,9 +41,21 @@ const CrudUsers = () => {
     fetchCookies()
   }, []);
 
+  const [typeListCustomers, setTypeListCustomers] = useState('list')
+
+  const handleWindowResize = () => {
+      if(window.innerWidth < 800) setTypeListCustomers('card')
+      else setTypeListCustomers('list')
+  }
+
+  window.addEventListener('resize', handleWindowResize)
+  window.addEventListener('load', handleWindowResize)
+
   return (
     <section className="body">
-      <ListClients customers={customers || []}/>
+      {typeListCustomers == 'list' ? 
+      <ListClients customers={customers || []}/> : 
+      <CardClients customers={customers || []} />}
     </section>
   );
 };
