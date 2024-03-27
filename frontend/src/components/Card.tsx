@@ -2,38 +2,36 @@ import Button from "./Button"
 import PerfilFirstLetter from "./PerfilFirstLetter"
 
  
-interface Customer {
+interface Cards {
   id: number
   name: string
   email: string
 }
 
-interface ListUsers {
-  customers: Customer[]
+interface CardProps {
+  item: Cards[]
 }
 
-const ListClients: React.FC<ListUsers> = ({customers}) => {
+const Card: React.FC<CardProps> = ({item}) => {
    return (
      <div className="container-cards" style={{background: 'red'}}>
       
-        {customers.map((customer) => (
-                <div className="card-customer" key={customer.id}>
-                  <td><PerfilFirstLetter word={customer.name}/></td>
-                  <td>{customer.name}</td>
-                  <td>{customer.email}</td>
+        {item.map((item) => (
+                <div className="card-customer" key={item.id}>
+                  <td><PerfilFirstLetter word={item.name}/></td>
+                  <td>{item.name}</td>
+                  <td>{item.email}</td>
 
                   <div className="div-buttons">
                     <Button content="..."/>
                   </div>
                 </div>   
               ))}
-                
-  
      </div>
    )
  }
  
-export default ListClients
+export default Card
  
 
 

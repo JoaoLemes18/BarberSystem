@@ -7,30 +7,31 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 // COMPOTENTS
-import ListClients from "../components/ListClients";
-import CardClients from "../components/CardClients"
-
+import List from "../components/List";
+import Card from "../components/Card"
+import Modal from "../components/Modal";
+import CreateAppointment from "../components/CreateAppointment";
 
 const CrudUsers = () => {
 
-  const [customers, setCustomer] = useState()
+  const [appointments, setAppointments] = useState()
 
   useEffect(() => {
     const fetchCookies = async () => {
       const cookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('userToken='));
     
       if (cookie) {
-        const token = cookie.split('=')[1];
+        const token = cookie.split('=')[1]
         
         try {
-          const response = await axios.get('http://localhost:3000/users/listUsers', {
+          const response = await axios.get('http://localhost:3000/appointments', {
             headers: {
               'Authorization': `Bearer ${token}`
             }
           });
          
-          setCustomer(response.data)
-          return response
+          setAppointments(response.data)
+          console.log(response.data)
         } catch (err) {
           return err
         }
@@ -53,9 +54,12 @@ const CrudUsers = () => {
 
   return (
     <section className="body">
-      {typeListCustomers == 'list' ? 
-      <ListClients customers={customers || []}/> : 
-      <CardClients customers={customers || []} />}
+      <div className="container-all">
+        <CreateAppointment />
+        {typeListCustomers == 'list' ? 
+        <List item={appointments || []}/> : 
+        <Card item={appointments || []} />}
+      </div>
     </section>
   );
 };

@@ -1,49 +1,53 @@
 @import 'variables.scss';
 
-.container-cards {
+
+.container-all {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    width: 90%;
-    max-width: 1024px;
-    gap: 20px;
-    flex-wrap: wrap;
+    width: min(900px, 90%);
 
-    .card-customer {
+    .container-list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    overflow-y: scroll;
+    height: 400px;
+    padding: 20px 0;
+    
+    .list {
         display: flex;
         align-items: center;
-        width: 100%;
-        padding: 15px;
+        justify-content: space-between;
+        padding: 10px;
         border-radius: 10px;
-        border: 1px solid $border-color-gray;
         background-color: $color-black-secondary;
+        border: 1px solid $border-color-gray;
+        color: $color-medium-gray;
+        width: 90%;
+
         
-        td {
-            color: $color-medium-gray;
-            overflow: hidden;
-            flex: 1 1;
-        }
 
-        .div-buttons {
+        div:nth-child(n+2):nth-child(-n+3) {
             display: flex;
-            gap: 15px;
-            
-            button {
-                height: 50px;
-                width: 50px;
-                padding: 0;
-                border-radius: 5px;
-                background: transparent;
-                color: $color-medium-gray;
-                border: 1px solid $border-color-gray;
-            }
+            width: max(200px, 200px);
+        }
+        
+        button {
+            border-radius: 5px;
+            background-color: $color-black-secondary;
+            border: 1px solid $border-color-gray;
+            color: $color-medium-gray;
         }
     }
 }
 
-@media (max-width: 1000px) {
-    .card-customer {
-      
-    }
 }
+
+// @media (max-width: 1000px) {
+//     .card-customer {
+      
+//     }
+// }

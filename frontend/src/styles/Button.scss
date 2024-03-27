@@ -1,6 +1,7 @@
 @import "./variables.scss";
 
 button {
+  display: flex;
     cursor: pointer;
     position: relative;
     padding: 15px;
@@ -15,6 +16,10 @@ button {
     font-weight: 600;
 
   p {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    gap: 5px;
     position: relative;
     z-index: 1;
   }
