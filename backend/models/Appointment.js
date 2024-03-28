@@ -4,7 +4,7 @@ const sequelize = require('../db/conn')
 const User = require('./User')
 
 const Appointment = sequelize.define('Appointment', {
-    id_appointments: {
+    id_appointment: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
@@ -13,10 +13,11 @@ const Appointment = sequelize.define('Appointment', {
     id_user: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {
-            model: User,
-            key: 'id'
-        }
+    },
+
+    hour: {
+        type: DataTypes.TIME, 
+        allowNull: false
     }
 })
 

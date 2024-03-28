@@ -7,7 +7,7 @@ const User  = require('../models/User')
 const Appointment = require('../models/Appointment')
 
 
-// User.sync({ alter: true }) // Sicronizar as mudanças do User
+// Appointment.sync({ alter: true }) // Sicronizar as mudanças do User
 //   .then(() => {
 //     console.log('Modelo sincronizado com o banco de dados');
 //   })
@@ -19,7 +19,7 @@ exports.getAllUsers = async (req, res) => {
         try {
             const users = await User.findAll()
            if(users) res.json(users)
-           else res.json({mg: 'db vazio'})
+           else res.json({mg: 'db vazio'}) 
         } catch (err) {
             res.json(err)
         }
@@ -38,17 +38,12 @@ exports.createUser = async (req, res) => {
     const passwordHash = await bcrypt.hash(password, salt)
 
     try {
-        const newUser = await User.create({
+        await User.create({
             name: name, 
             email: email, 
             password: passwordHash,
             user_token: ''
     })
-
-        await Appointment.create({
-            id_user: newUser.id
-        })
-
 
         return res.status(201).json({msg: 'User Created'})
     } catch(err) {

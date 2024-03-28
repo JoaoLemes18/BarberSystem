@@ -12,7 +12,7 @@ exports.checkToken = (req, res, next) => {
 
     if(!token) return res.status(401).json({  msg2: token})
 
-    try { 
+    try {  
         const secret = process.env.SECRET
         jwt.verify(token, secret)
         next()
