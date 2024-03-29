@@ -1,13 +1,48 @@
-@import 'variables.scss';
-
+@import "variables.scss";
 
 .container-all {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: min(900px, 90%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  width: min(900px, 90%);
+  margin-bottom: 25px;
 
-    .container-list {
+  //CARD STYLE
+  .container-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .card-customer {
+    background-color: $color-black-secondary;
+    border: 1px solid $border-color-gray;
+    color: $color-medium-gray;
+    width: 250px;
+    height: 100px;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .info-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  button {
+    border-radius: 5px;
+    background-color: $color-black-secondary;
+    border: 1px solid $border-color-gray;
+    color: $color-medium-gray;
+  }
+  //LIST STYLE
+  .container-list {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -16,38 +51,29 @@
     overflow-y: scroll;
     height: 400px;
     padding: 20px 0;
-    
+
     .list {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      border-radius: 10px;
+      background-color: $color-black-secondary;
+      border: 1px solid $border-color-gray;
+      color: $color-medium-gray;
+      width: 90%;
+
+      div:nth-child(n + 2):nth-child(-n + 3) {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px;
-        border-radius: 10px;
-        background-color: $color-black-secondary;
+        width: max(200px, 200px);
+      }
+
+      button {
+        border-radius: 5px;
+        background-color: $color-white-primary;
         border: 1px solid $border-color-gray;
         color: $color-medium-gray;
-        width: 90%;
-
-        
-
-        div:nth-child(n+2):nth-child(-n+3) {
-            display: flex;
-            width: max(200px, 200px);
-        }
-        
-        button {
-            border-radius: 5px;
-            background-color: $color-black-secondary;
-            border: 1px solid $border-color-gray;
-            color: $color-medium-gray;
-        }
+      }
     }
+  }
 }
-
-}
-
-// @media (max-width: 1000px) {
-//     .card-customer {
-      
-//     }
-// }
