@@ -11,8 +11,10 @@ interface ButtonProps {
 const Button = ({ content, icon, ...props }: ButtonProps) => {
   return (
     <button {...props}>
-      {" "}
-      <p>{icon}{content}</p>{" "}
+      <p>
+        {icon}
+        {content}
+      </p>
     </button>
   );
 };

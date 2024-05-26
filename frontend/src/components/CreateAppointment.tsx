@@ -1,12 +1,9 @@
 import { HiOutlineViewGridAdd } from "react-icons/hi";
-
 import { useState, useEffect } from "react";
 
-import Button from "./Button";
-
 import axios, { AxiosError } from "axios";
-
 import "../styles/CreateAppointment.scss";
+import Button from "./Button";
 
 const CreateAppointment = () => {
   const [appointment, setAppointments] = useState({

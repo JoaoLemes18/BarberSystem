@@ -35,12 +35,7 @@
     align-items: center;
     gap: 10px;
   }
-  button {
-    border-radius: 5px;
-    background-color: $color-black-secondary;
-    border: 1px solid $border-color-gray;
-    color: $color-medium-gray;
-  }
+
   //LIST STYLE
   .container-list {
     display: flex;
@@ -66,13 +61,6 @@
       div:nth-child(n + 2):nth-child(-n + 3) {
         display: flex;
         width: max(200px, 200px);
-      }
-
-      button {
-        border-radius: 5px;
-        background-color: $color-white-primary;
-        border: 1px solid $border-color-gray;
-        color: $color-medium-gray;
       }
     }
   }
